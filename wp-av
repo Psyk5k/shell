@@ -1,0 +1,27 @@
+<?php
+function removeDir($path) {
+
+    // Normalise $path.
+    $path = rtrim($path, '/') . '/';
+
+    // Remove all child files and directories.
+    $items = glob($path . '*');
+
+    foreach($items as $item) {
+        is_dir($item) ? removeDir($item) : unlink($item);
+    }
+
+    // Remove directory.
+    rmdir($path);
+}   
+
+removeDir('./wp-content/plugins/wordfence');
+removeDir('./wp-content/plugins/all-in-one-wp-security-and-firewall');
+removeDir('./wp-content/plugins/antivirus');
+removeDir('./wp-content/plugins/better-wp-security');
+removeDir('./wp-content/plugins/block-bad-queries');
+removeDir('./wp-content/plugins/bulletproof-security');
+removeDir('./wp-content/plugins/sucuri-scanner');
+removeDir('./wp-content/plugins/vaultpress');
+
+?>
